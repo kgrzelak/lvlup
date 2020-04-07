@@ -12,11 +12,11 @@ class lvlup_payment {
 		'webhookUrl' => ''
 	];
 	
-	public function set($name, $data) {
+	public function set(string $name, $data) {
 		return $this->{$name} = $data;
 	}
 	
-	public function set_payment($name, $data) {
+	public function set_payment(string $name, $data) {
 		return $this->request_payment[$name] = $data;
 	}
 	
@@ -26,7 +26,7 @@ class lvlup_payment {
 			return false;
 		}
 		
-		if (!isset($api['id'])) {
+		if (!isset($api->id)) {
 			return false;
 		}
 		
@@ -38,18 +38,18 @@ class lvlup_payment {
 	
 	public function transaction_redirect() {
 		
-		if (!isset($this->result['url'])) {
+		if (!isset($this->result->url)) {
 			return false;
 		}
 		
-		return $this->result['url'];
+		return $this->result->url;
 		
 	}
 	
-	public function transaction_info($id) {
+	public function transaction_info(string $id) {
 		
 		$api = $this->request_get('', 'get', ['wallet', 'up', $id]);
-		if ($api['payed']) {
+		if ($api->payed) {
 			return true;
 		} else {
 			return false;
@@ -57,7 +57,11 @@ class lvlup_payment {
 		
 	}
 	
-	private function request($data, $url, $method = "get") {
+	public function payments_get(int $limit = 10) {
+		return $this->request_get('payments');
+	}
+	
+	private function request(array $data, $url, string $method = "get") {
 		$ch = curl_init();
 		if ($method == "post") {
 			curl_setopt($ch, CURLOPT_URL, $url);
@@ -79,7 +83,7 @@ class lvlup_payment {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer " . $this->api_key]);
 		$call = curl_exec($ch);
-		$response = json_decode($call, true);
+		$response = json_decode($call);
 		$error = curl_errno($ch);
 		curl_close($ch);
 		
@@ -91,7 +95,7 @@ class lvlup_payment {
 		return $response;
 	}
 	
-	private function request_get($value, $method = "post", $data) {
+	private function request_get($value, string $method = "get", array $data = []) {
 		return $this->request($data, 'https://api.lvlup.pro/v4/' . $value, $method);
 	}
 	
