@@ -4,7 +4,7 @@ class lvlup_payment {
 	
 	protected $api_key = '';
 	
-	protected $result_json = null;
+	protected $result = null;
 	
 	protected $request_payment = [
 		'amount' => '',
@@ -22,38 +22,27 @@ class lvlup_payment {
 	
 	public function transaction_generate() {
 		
-		$ch = curl_init('https://api.lvlup.pro/v4/wallet/up');
-		
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->request_payment));
-		curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer " . $this->api_key]);
-
-		$result = curl_exec($ch);
-		curl_close($ch);
-		
-		try {
-			$resultDecode = json_decode($result);
-			$this->result_json = $resultDecode;
-			return true;
-		} catch (Exception $err) {
+		if (!$api = $this->request_get('wallet/up', 'post', $this->request_payment)) {
 			return false;
 		}
 		
-		if (!isset($this->result_json->id)) {
+		if (!isset($api['id'])) {
 			return false;
 		}
+		
+		$this->result = $api;
+		
+		return true;
 		
 	}
 	
 	public function transaction_redirect() {
 		
-		if (!isset($this->result_json->url)) {
+		if (!isset($this->result['url'])) {
 			return false;
 		}
 		
-		return $this->result_json->url;
+		return $this->result['url'];
 		
 	}
 	
@@ -75,7 +64,6 @@ class lvlup_payment {
 			curl_setopt($ch, CURLOPT_POST, true);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 		} else {
-			$i = 0;
 			$params = '';
 			foreach ($data as $d) {
 				if (!next($data)) {
@@ -83,7 +71,6 @@ class lvlup_payment {
 				} else {
 					$params .= $d . '/';
 				}
-				$i++;
 			}
 			curl_setopt($ch, CURLOPT_URL, $url . $params);
 		}
@@ -97,7 +84,8 @@ class lvlup_payment {
 		curl_close($ch);
 		
 		if ($error > 0) {
-			throw new RuntimeException('CURL ERROR Code: ' . $error);
+			//throw new RuntimeException('CURL ERROR Code: ' . $error);
+			return false;
 		}
 		
 		return $response;
