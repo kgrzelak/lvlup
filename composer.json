@@ -1,0 +1,8 @@
+{
+    "name": "kgrzelak/lvlup-payment",
+    "description": "",
+	"license": "MIT",
+    "require": {
+        "php": "^7.0",
+    }
+}
