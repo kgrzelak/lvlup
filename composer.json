@@ -17,5 +17,5 @@
             "email": "k.grzelak@systemy.net"
         }
     ],
-	"minimum-stability": "stable"
+	"minimum-stability": "dev-master"
 }
