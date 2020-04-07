@@ -3,7 +3,7 @@
     "description": "",
 	"license": "MIT",
     "require": {
-        "php": "^7.0"
+        "php": "^7.2"
     },
     "autoload": {
         "psr-0": {
