@@ -15,5 +15,6 @@
             "name": "Krzysztof Grzelak",
             "email": "k.grzelak@systemy.net"
         }
-    ]
+    ],
+	"minimum-stability": "stable"
 }
