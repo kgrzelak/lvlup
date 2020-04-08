@@ -4,8 +4,9 @@
 	"type": "library",
 	"version": "1.2",
 	"license": "MIT",
+	"minimum-stability": "stable",
     "require": {
-        "php": "^7.0"
+        "php": ">=7.0"
     },
     "authors": [
         {
@@ -17,6 +18,5 @@
         "psr-4": {
             "kgrzelak\\lvlup\\": "src"
         }
-	},
-	"minimum-stability": "stable"
+	}
 }
