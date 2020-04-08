@@ -14,8 +14,8 @@ class Payments {
 		'webhookUrl' => ''
 	];
 	
-	public function set(string $name, $data) {
-		return $this->{$name} = $data;
+	public function __construct(string $api_key) {
+		$this->api_key = $api_key;
 	}
 	
 	public function set_payment(string $name, $data) {
