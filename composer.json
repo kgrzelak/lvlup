@@ -2,7 +2,7 @@
     "name": "kgrzelak/lvlup-payment",
     "description": "PHP Class lvlup-payment",
 	"type": "library",
-	"version": "1.3",
+	"version": "1.4",
 	"license": "MIT",
 	"minimum-stability": "stable",
     "require": {
