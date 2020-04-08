@@ -1,4 +1,5 @@
 lvlup-payment PHP class
+https://www.lvlup.pro/
 
 Can be installed by Composer.
 
@@ -8,6 +9,7 @@ composer require kgrzelak/lvlup-payment
 
 Example
 
+Generating trasnsaction
 ```
 <?php
 
@@ -28,4 +30,14 @@ echo 'płać i płacz ';
 //Transaction url
 echo $lvlup->transaction_redirect();
 
+```
+
+Transaction info
+```
+$lvlup->transaction_info('transaction_id'); //bolean
+```
+
+Transactions list
+```
+$lvlup->payments_get(); //array
 ```
