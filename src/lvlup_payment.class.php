@@ -1,5 +1,7 @@
 <?php
 
+namespace kgrzelak\lvlupPayment;
+
 class lvlup_payment {
 	
 	protected $api_key = '';
