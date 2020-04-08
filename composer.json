@@ -6,16 +6,16 @@
     "require": {
         "php": "^7.2"
     },
-    "autoload": {
-        "psr-0": {
-            "lvlup-payment": "src"
-        }
-	},
     "authors": [
         {
             "name": "Krzysztof Grzelak",
             "email": "k.grzelak@systemy.net"
         }
     ],
+    "autoload": {
+        "psr-0": {
+            "lvlup-payment": "src"
+        }
+	},
 	"minimum-stability": "stable"
 }
