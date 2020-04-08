@@ -14,7 +14,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "lvlup-payment": "src"
+            "lvlup_payment": "src"
         }
 	},
 	"minimum-stability": "stable"
