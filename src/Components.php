@@ -6,7 +6,7 @@ use GuzzleHttp\RequestOptions;
 
 class Components {
 
-	private function request(array $data, $url, string $apiKey, string $method = "GET") {
+	public function request(array $data, $url, string $apiKey, string $method = "GET") {
         
         $params = '';
 
