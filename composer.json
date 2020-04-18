@@ -2,7 +2,7 @@
     "name": "kgrzelak/lvlup",
     "description": "PHP Class lvlup.pro",
 	"type": "library",
-	"version": "1.5",
+	"version": "1.0",
 	"license": "MIT",
 	"minimum-stability": "stable",
     "require": {
