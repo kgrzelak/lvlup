@@ -1,6 +1,6 @@
 {
-    "name": "kgrzelak/lvlup-payment",
-    "description": "PHP Class lvlup-payment",
+    "name": "kgrzelak/lvlup",
+    "description": "PHP Class lvlup.pro",
 	"type": "library",
 	"version": "1.4",
 	"license": "MIT",
