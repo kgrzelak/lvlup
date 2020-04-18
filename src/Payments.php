@@ -1,10 +1,13 @@
 <?php
-
 namespace kgrzelak\lvlup;
 
-class Payments {
+use kgrzelak\lvlup\Components;
+
+class Payments extends Components {
 	
-	protected $api_key = '';
+	protected $apiKey = '';
+
+	protected $components = '';
 	
 	protected $result = null;
 	
@@ -14,8 +17,10 @@ class Payments {
 		'webhookUrl' => ''
 	];
 	
-	public function __construct(string $api_key) {
-		$this->api_key = $api_key;
+	public function __construct(string $apiKey) {
+		$this->apiKey = $apiKey;
+
+		$this->components = new Components();
 	}
 	
 	public function set_payment(string $name, $data) {
@@ -63,42 +68,8 @@ class Payments {
 		return $this->request_get('payments');
 	}
 	
-	private function request(array $data, $url, string $method = "get") {
-		$ch = curl_init();
-		if ($method == "post") {
-			curl_setopt($ch, CURLOPT_URL, $url);
-			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-		} else {
-			$params = '';
-			foreach ($data as $d) {
-				if (!next($data)) {
-					$params .= $d;
-				} else {
-					$params .= $d . '/';
-				}
-			}
-			curl_setopt($ch, CURLOPT_URL, $url . $params);
-		}
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_FAILONERROR, true);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer " . $this->api_key]);
-		$call = curl_exec($ch);
-		$response = json_decode($call);
-		$error = curl_errno($ch);
-		curl_close($ch);
-		
-		if ($error > 0) {
-			//throw new RuntimeException('CURL ERROR Code: ' . $error);
-			return false;
-		}
-		
-		return $response;
-	}
-	
-	private function request_get($value, string $method = "get", array $data = []) {
-		return $this->request($data, 'https://api.lvlup.pro/v4/' . $value, $method);
+	private function request_get($value, string $method = "GET", array $data = []) {
+		return $this->components->request($data, 'https://api.lvlup.pro/v4/' . $value, $this->apiKey, $method);
 	}
 	
 }
