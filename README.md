@@ -4,7 +4,7 @@ https://www.lvlup.pro/
 Can be installed by Composer.
 
 ```
-composer require kgrzelak/lvlup-payment
+composer require kgrzelak/lvlup
 ```
 
 Example
