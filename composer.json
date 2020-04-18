@@ -3,7 +3,6 @@
     "description": "PHP Class lvlup.pro",
 	"type": "library",
 	"license": "MIT",
-	"minimum-stability": "stable",
     "require": {
         "php": ">=7.0",
 		"guzzlehttp/guzzle": "~6.0"
